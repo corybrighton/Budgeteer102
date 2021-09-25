@@ -1,0 +1,37 @@
+<div>
+  <mat-card class="card">
+    <div class="center">
+
+      <!-- Card Header -->
+      <mat-card-header>
+        <mat-card-title>Income</mat-card-title>
+      </mat-card-header>
+    </div>
+
+    <!-- Image -->
+    <div class="center">
+      <img class="percent" src="../../assets/PiggyBank.png">
+    </div>
+
+    <!-- Card Content -->
+    <mat-card-content class="center">
+      <mat-icon>analytics</mat-icon>
+    </mat-card-content>
+
+    <!-- Card Actions -->
+    <mat-card-actions class="center">
+
+      <!-- Add Button -->
+      <!-- <button mat-button>
+        <mat-icon>add</mat-icon>
+      </button> -->
+
+      <!-- Tranfer Button -->
+      <button mat-button>
+        <mat-icon>compare_arrows</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <app-budget-cat *ngFor="let category of budgetCategory" [budgetCategory]="category"></app-budget-cat>
+</div>

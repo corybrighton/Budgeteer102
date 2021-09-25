@@ -1,0 +1,48 @@
+.link {
+  font-size: larger;
+  display: flex;
+  align-items: baseline;
+  cursor: pointer;
+}
+
+.icon-class {
+  height: 50px;
+  width: 50px;
+  font-size: 50px;
+  margin: 15px 35px;
+}
+
+p {
+  align-self: center;
+  margin-right: 50px;
+}
+
+.app-body {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.main-container {
+  flex: 1 1 auto;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.budgeteer-sidenav-content {
+  flex: 1 1 auto;
+}
+
+.budgeteer-sidenav {
+  padding: 5px 15px;
+  flex: 1 1 auto;
+}
+
+img {
+  height: 6vh;
+  margin: 0 5px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
