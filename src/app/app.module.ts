@@ -16,6 +16,7 @@ import { WorthComponent } from './worth/worth.component';
 import { SpendingComponent } from './spending/spending.component';
 import { DebtsComponent } from './debts/debts.component';
 import { SettingsComponent } from './settings/settings.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { SettingsComponent } from './settings/settings.component';
     WorthComponent,
     SpendingComponent,
     DebtsComponent,
+    TransactionsComponent,
     SettingsComponent
   ],
   imports: [

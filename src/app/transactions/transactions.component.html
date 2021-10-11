@@ -1,7 +1,19 @@
-<table mat-table>
-
-  <ng-container *ngFor="let column of columns">
-    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-  </ng-container>
-
+<p>Table</p>
+<table>
+  <thead>
+    <tr>
+      <th *ngFor="let c of headerColumns">
+        {{c}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactionData">
+      <td>{{transaction.date}}</td>
+      <td>{{transaction.payee}}</td>
+      <td>{{transaction.amount}}</td>
+      <td>{{transaction.category}}</td>
+      <td>{{transaction.memo}}</td>
+    </tr>
+  </tbody>
 </table>
