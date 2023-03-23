@@ -36,16 +36,21 @@ export class AppComponent {
       name: "Balance Budget",
       link: "balancebudget"
     },
+    // {
+    //   icon: "trending_up",
+    //   name: "Worth",
+    //   link: "worth"
+    // },
     {
       icon: "trending_up",
-      name: "Worth",
-      link: "worth"
+      name: "Worth and Debts",
+      link: "worthAndDebts"
     },
-    {
-      icon: "trending_down",
-      name: "Debts",
-      link: "debts"
-    },
+    // {
+    //   icon: "trending_down",
+    //   name: "Debts",
+    //   link: "debts"
+    // },
     {
       icon: "shopping_basket",
       name: "Spending",

@@ -1,7 +1,14 @@
 <mat-card class="card" *ngIf="budgetCategory">
-  {{budgetCategory.name}}
-  ${{budgetCategory.amount}}
-  ${{budgetCategory.spent}}
-  ${{budgetCategory.lastMonthBudgetedAmount}}
-  {{budgetCategory.monthlyRecurring}}
+  <!-- {{budgetCategory.showAll()}} -->
+  <h1>{{budgetCategory.name}} </h1>
+  <div>{{budgetCategory.leftThisMonth()}}</div>
+   
+  <div>Amount ${{budgetCategory.amount}}</div>
+  <div>Spent ${{budgetCategory.spent}}</div>
+  
+  <div>Last Month Amount ${{budgetCategory.lastMonthBudgetedAmount}}</div>
+  <div>Last Month Spent ${{budgetCategory.lastMonthSpent}}</div>
+  <div>Left from last month ${{budgetCategory.lastMonthBudgetedAmount-budgetCategory.lastMonthSpent}}</div>
+  <div>XX% of planned income</div>
+  <div>{{budgetCategory.persentLeft()}}% Left</div>
 </mat-card>

@@ -8,6 +8,7 @@ import { DebtsComponent } from './debts/debts.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SpendingComponent } from './spending/spending.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { WorthAndDebtsComponent } from './worth-and-debts/worth-and-debts.component';
 import { WorthComponent } from './worth/worth.component';
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'banks', component: BanksComponent },
   { path: 'balancebudget', component: BalanceBudgetComponent },
   { path: 'worth', component: WorthComponent },
+  { path: 'worthAndDebts', component: WorthAndDebtsComponent },
   { path: 'spending', component: SpendingComponent },
   { path: 'debts', component: DebtsComponent },
   { path: 'settings', component: SettingsComponent },

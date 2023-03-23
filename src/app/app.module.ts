@@ -17,6 +17,7 @@ import { SpendingComponent } from './spending/spending.component';
 import { DebtsComponent } from './debts/debts.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { WorthAndDebtsComponent } from './worth-and-debts/worth-and-debts.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
     SpendingComponent,
     DebtsComponent,
     TransactionsComponent,
-    SettingsComponent
+    SettingsComponent,
+    WorthAndDebtsComponent
   ],
   imports: [
     BrowserModule,
