@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MockBudgetCategories } from '../mock-data/mockBudgets';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-budgets',
@@ -12,6 +13,10 @@ export class BudgetsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  transfer() {
+    console.log("transfer pressed")
   }
 
 }

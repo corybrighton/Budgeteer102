@@ -1,7 +1,7 @@
 <mat-card class="card" *ngIf="budgetCategory">
   <!-- {{budgetCategory.showAll()}} -->
-  <h1>{{budgetCategory.name}} </h1>
-  <div>{{budgetCategory.leftThisMonth()}}</div>
+  <h1 class="nameHeader"><mat-icon> {{budgetCategory.icon}} </mat-icon> {{budgetCategory.name}} </h1>
+  <div> {{budgetCategory.leftThisMonth()}}</div>
    
   <div>Amount ${{budgetCategory.amount}}</div>
   <div>Spent ${{budgetCategory.spent}}</div>

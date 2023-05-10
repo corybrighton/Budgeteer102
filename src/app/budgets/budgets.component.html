@@ -22,16 +22,18 @@
     <mat-card-actions class="center">
 
       <!-- Add Button -->
-      <!-- <button mat-button>
+      <button mat-button>
         <mat-icon>add</mat-icon>
-      </button> -->
+      </button>
 
       <!-- Tranfer Button -->
-      <button mat-button>
+      <button mat-button (click)="transfer()">
         <mat-icon>compare_arrows</mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>
 
-  <app-budget-cat *ngFor="let category of budgetCategory" [budgetCategory]="category"></app-budget-cat>
+  <app-budget-cat 
+    *ngFor="let category of budgetCategory" 
+    [budgetCategory]="category"></app-budget-cat>
 </div>

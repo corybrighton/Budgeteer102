@@ -1,6 +1,7 @@
 interface BudgetCategoryInterface{
   name: string;
   amount?: number;
+  icon?: string;
   spent?: number;
   lastMonthSpent?: number;
   lastMonthBudgetedAmount?: number;
@@ -9,13 +10,15 @@ interface BudgetCategoryInterface{
 export class BudgetCategory implements BudgetCategoryInterface{
   name: string;
   amount: number;
+  icon: string;
   spent: number;
   lastMonthSpent: number;
   lastMonthBudgetedAmount: number;
 
-  constructor(name: string, amount = 0, spent = 0, lastMonthBudgetedAmount = 0, lastMonthSpent = 0) {
+  constructor(name: string, amount = 0, spent = 0, lastMonthBudgetedAmount = 0, lastMonthSpent = 0, icon = "savings",) {
     this.name = name;
     this.amount = amount;
+    this.icon = icon;
     this.spent = spent;
     this.lastMonthBudgetedAmount = lastMonthBudgetedAmount;
     this.lastMonthSpent = lastMonthSpent;
