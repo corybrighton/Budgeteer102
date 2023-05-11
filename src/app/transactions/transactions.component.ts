@@ -19,6 +19,36 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public changeListener(event: Event) {
+    let files = (event.target as HTMLInputElement).files
+    
+    if (files == null) return;
+    if (files.length <= 0) return;
+    console.log(files);
+
+    
+    
+    let file: File | null = files.item(0); 
+    
+    if (file == null) return;
+    var regex = new RegExp("(.*?)\.(csv)$");
+    if (!regex.test(file.name.toLowerCase())) {
+      file = null;
+      console.log( "not a file")
+      return;
+    }
+    console.log(file.name);
+    console.log(file.size);
+    console.log(file.type);
+      
+    let reader: FileReader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = (e) => {
+        let csv: string = reader.result as string;
+        console.log(csv);
+       }
+    
+}
 
 
 }
