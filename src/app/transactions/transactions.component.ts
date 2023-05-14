@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MockTransactionData } from '../mock-data/mockTransactionData';
 import { Transaction } from '../models/transaction';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-transactions',
@@ -13,42 +14,44 @@ export class TransactionsComponent implements OnInit {
     ["Date", "Payee", "Amount", "Category", "Memo"];
 
   transactionData: Transaction[] = MockTransactionData;
+  csvTransactions: string[] = [];
+  testing = environment.testing;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public changeListener(event: Event) {
+  public getCSV(event: Event) {
     let files = (event.target as HTMLInputElement).files
     
-    if (files == null) return;
-    if (files.length <= 0) return;
-    console.log(files);
+    if (files == null || files.length <= 0) return;
 
-    
-    
     let file: File | null = files.item(0); 
     
-    if (file == null) return;
-    var regex = new RegExp("(.*?)\.(csv)$");
-    if (!regex.test(file.name.toLowerCase())) {
-      file = null;
-      console.log( "not a file")
-      return;
-    }
-    console.log(file.name);
-    console.log(file.size);
-    console.log(file.type);
-      
+    if (file == null || !this.isCSV(file)) return;
+
+    this.csvtoObject(file);
+  }
+  
+  csvtoObject(file: File) {
     let reader: FileReader = new FileReader();
     reader.readAsText(file);
     reader.onload = (e) => {
-        let csv: string = reader.result as string;
-        console.log(csv);
-       }
-    
-}
+      let csv: string = reader.result as string;
+      this.csvTransactions.push(csv);
+    }
+  }
+  
+  isCSV(file:File): boolean {
+    var regex = new RegExp("(.*?)\.(csv)$");
+    return regex.test(file.name.toLowerCase());
+  }
+  
+  public testButton() {
+    console.log("button pushed")
+    console.log(this.csvTransactions[0])
+  }
 
 
 }
