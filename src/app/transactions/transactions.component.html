@@ -1,27 +1,23 @@
-<p>Table</p>
-<input type="file" 
+<div class="transaction header">
+  <div class="headerData" *ngFor="let c of headerColumns" > {{c}} </div>
+</div>
+
+<div class="transaction table">
+  <div class="tableRow" *ngFor="let transaction of transactionData" >
+    <div class="tableData">{{transaction.date | date : 'shortDate'}}</div>
+    <div class="tableData">{{transaction.payee}}</div>
+    <div class="tableData">${{transaction.amount}}</div>
+    <div class="tableData">{{transaction.category}}</div>
+    <div class="tableData">{{transaction.memo}}</div>
+  </div>
+</div>
+
+<div class="transaction footer">
+  <input type="file" 
   name="File Upload" 
   id="csvFileUpload" 
   (change)="getCSV($event)" 
   accept=".csv" />
-
-  <button *ngIf="testing"  (click)="testButton()">test button</button>
   
-<table>
-  <thead>
-    <tr color="primary">
-      <th *ngFor="let c of headerColumns">
-        {{c}}
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let transaction of transactionData">
-      <td>{{transaction.date}}</td>
-      <td>{{transaction.payee}}</td>
-      <td>{{transaction.amount}}</td>
-      <td>{{transaction.category}}</td>
-      <td>{{transaction.memo}}</td>
-    </tr>
-  </tbody>
-</table>
+  <button *ngIf="testing"  (click)="testButton()">test button</button>
+</div>

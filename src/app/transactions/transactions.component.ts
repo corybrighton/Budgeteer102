@@ -24,22 +24,18 @@ export class TransactionsComponent implements OnInit {
 
   public getCSV(event: Event) {
     let files = (event.target as HTMLInputElement).files
-    
     if (files == null || files.length <= 0) return;
-
     let file: File | null = files.item(0); 
-    
     if (file == null || !this.isCSV(file)) return;
-
-    this.csvtoObject(file);
+    this.csvToString(file);
   }
   
-  csvtoObject(file: File) {
+  csvToString(file: File) {
     let reader: FileReader = new FileReader();
     reader.readAsText(file);
-    reader.onload = (e) => {
+    reader.onload = () => {
       let csv: string = reader.result as string;
-      this.csvTransactions.push(csv);
+      this.csvTransactions = csv.split("\n");
     }
   }
   
@@ -51,6 +47,7 @@ export class TransactionsComponent implements OnInit {
   public testButton() {
     console.log("button pushed")
     console.log(this.csvTransactions[0])
+    console.log(this.csvTransactions[1])
   }
 
 
