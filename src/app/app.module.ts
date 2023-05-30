@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { NgChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { WorthAndDebtsComponent } from './worth-and-debts/worth-and-debts.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgChartsModule,
     NoopAnimationsModule,
     MaterialModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
