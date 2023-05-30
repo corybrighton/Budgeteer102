@@ -1,12 +1,9 @@
-<div>
-  <div style="display: block">
-    <canvas baseChart 
-            [type]="lineChartType"
-            [datasets]="chartData" 
-            [labels]="monthLables" 
-            [legend]="lineChartLegend" 
-            [options]="lineChartOptions"
-            >
-    </canvas>
-  </div>
+<div class="chartArea">
+  <canvas baseChart 
+          [type]="scatterChartType"
+          [datasets]="chartData" 
+          [legend]="scatterChartLegend" 
+          [options]="scatterChartOptions"
+          >
+  </canvas>
 </div>

@@ -10,39 +10,78 @@ export class WorthAndDebtsComponent implements OnInit {
 
   constructor() { }
 
-  public debtData = [65, 59, 60, 51, 56, 55, 40, 60, 20, 50, 54, 45];
-  public worthData = [45, 35, 10, 45, 56, 55, 70, 80, 50, 60, 54, 80];
-  public lineChartOptions = {
+  public debtData = [
+    { x: 1, y: 65 },
+    { x: 2, y: 59 },
+    { x: 3, y: 60 },
+    { x: 4, y: 51 },
+    { x: 5, y: 50 },
+    { x: 6, y: 55 },
+    { x: 7, y: 50 },
+    { x: 8, y: 40 },
+    { x: 9, y: 45 },
+    { x: 10, y: 50 },
+    { x: 11, y: 40 },
+    { x: 12, y: 30 }];
+    public worthData = [
+    { x: 1, y: 25 },
+    { x: 2, y: 26 },
+    { x: 3, y: 27 },
+    { x: 4, y: 28 },
+    { x: 5, y: 29 },
+    { x: 6, y: 30 },
+    { x: 7, y: 31 },
+    { x: 8, y: 32 },
+    { x: 9, y: 33 },
+    { x: 10, y: 34 },
+    { x: 11, y: 35 },
+      { x: 12, y: 36 }];
+  
+    // { x: "Jan", y: 25 },
+    // { x: "Feb", y: 26 },
+    // { x: "Mar", y: 27 },
+    // { x: "Apr", y: 28 },
+    // { x: "May", y: 29 },
+    // { x: "Jun", y: 30 },
+    // { x: "Jul", y: 31 },
+    // { x: "Aug", y: 32 },
+    // { x: "Sep", y: 33 },
+    // { x: "Oct", y: 34 },
+    // { x: "Nov", y: 35 },
+    // { x: "Dec", y: 36 }];
+  public scatterChartOptions = {
     scaleShowVerticalLines: true,
     responsive: true,
-    scale: {
-      min: 0
-    }
+    scales: {
+      y: {
+        min: 0,
+      },
+      x: {
+        min: 1
+      }
+    },
   };
 
-  public monthLables = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  public lineChartLegend = true;
+  public scatterChartLegend = true;
 
-  public lineChartType: ChartType = 'line';
+  public scatterChartType: ChartType = 'scatter';
 
   public chartData = [
     {
       data: this.worthData,
       label: 'Worth',
-      backgroundColor: '#2f4d2d55',
-      borderColor: '#2f4d2d',
-      pointBackgroundColor: '#2f4d2d55',
-      fill: 'origin'
+      backgroundColor: "#2f4d2d55",
+      borderColor: "#2f4d2d",
+      showLine: true,
+      fill: true
     },
     {
       data: this.debtData,
       label: 'Debts',
-      backgroundColor: "#463d2e55",
-      borderColor: '#463d2e',
-      pointBorderColor: '#463d2e',
-      pointHoverBackgroundColor: '#463d2e',
-      pointHoverBorderColor: '#463d2e',
-      fill: 'origin',
+      backgroundColor:"red",
+      borderColor: "red",
+      showLine: true,
+      fill: true
     },
   ];
 
