@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartType, Color } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-worth-and-debts',
@@ -9,66 +10,78 @@ import { ChartType, Color } from 'chart.js';
 export class WorthAndDebtsComponent implements OnInit {
 
   constructor() { }
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
-  public debtData = [
-    { x: 1, y: 65 },
-    { x: 2, y: 59 },
-    { x: 3, y: 60 },
-    { x: 4, y: 51 },
-    { x: 5, y: 50 },
-    { x: 6, y: 55 },
-    { x: 7, y: 50 },
-    { x: 8, y: 40 },
-    { x: 9, y: 45 },
-    { x: 10, y: 50 },
-    { x: 11, y: 40 },
-    { x: 12, y: 30 }];
-    public worthData = [
-    { x: 1, y: 25 },
-    { x: 2, y: 26 },
-    { x: 3, y: 27 },
-    { x: 4, y: 28 },
-    { x: 5, y: 29 },
-    { x: 6, y: 30 },
-    { x: 7, y: 31 },
-    { x: 8, y: 32 },
-    { x: 9, y: 33 },
-    { x: 10, y: 34 },
-    { x: 11, y: 35 },
-      { x: 12, y: 36 }];
+  public getRandomDate():number {
+    let start = new Date(2020, 1, 1);
+    let end = new Date()
+    let x = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    let xString = `${x.getMonth()}.${x.getDay()}`;
+    return +xString;
+  }
+
+  public debtData: number[] = []
+
+  public worthData: number[] = []
   
-    // { x: "Jan", y: 25 },
-    // { x: "Feb", y: 26 },
-    // { x: "Mar", y: 27 },
-    // { x: "Apr", y: 28 },
-    // { x: "May", y: 29 },
-    // { x: "Jun", y: 30 },
-    // { x: "Jul", y: 31 },
-    // { x: "Aug", y: 32 },
-    // { x: "Sep", y: 33 },
-    // { x: "Oct", y: 34 },
-    // { x: "Nov", y: 35 },
-    // { x: "Dec", y: 36 }];
-  public scatterChartOptions = {
+  public lineChartOptions = {
     scaleShowVerticalLines: true,
     responsive: true,
-    scales: {
+    scale: {
       y: {
         min: 0,
       },
       x: {
-        min: 1
+        type: 'time',
+        time: {
+          unit:'month'
+        }
       }
     },
   };
 
-  public scatterChartLegend = true;
+  public monthLabels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+  public labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+  public lineChartLegend = true;
 
-  public scatterChartType: ChartType = 'scatter';
+  public lineChartType: ChartType = 'line';
+
+  getWorth() {
+    for (let index = 0; index < 12; index++) {
+      this.worthData.push(Math.floor(Math.random() * 50))
+    }
+    this.updateLables(this.worthData.length);
+    // return this.worthData;
+    return this.worthData.sort((a, b) => a > b ? 1 : -1); 
+  }
+
+  getDebt() {
+    for (let index = 0; index < 12; index++) {
+      this.debtData.push(Math.floor(Math.random() * 50))
+    }
+    this.updateLables(this.debtData.length);
+    // return this.debtData;
+    return this.debtData.sort((a, b) => (a < b) ? 1 : -1);
+  }
+
+  updateLables(l: number) {
+    if (this.labels.length < this.debtData.length) this.addLables(this.debtData.length);
+    if (this.labels.length < this.worthData.length) this.addLables(this.worthData.length);
+    this.chart?.update();
+  }
+  
+  addLables(l: number) {
+    let monthIndex = 11;
+    for (let index = 0; index < l-12; index++) {
+      this.labels.unshift(this.monthLabels[monthIndex]);
+      monthIndex--;
+      if (monthIndex < 0) monthIndex = 11;
+    }
+  }
 
   public chartData = [
     {
-      data: this.worthData,
+      data: this.getWorth(),
       label: 'Worth',
       backgroundColor: "#2f4d2d55",
       borderColor: "#2f4d2d",
@@ -76,9 +89,9 @@ export class WorthAndDebtsComponent implements OnInit {
       fill: true
     },
     {
-      data: this.debtData,
+      data: this.getDebt(),
       label: 'Debts',
-      backgroundColor:"red",
+      backgroundColor:"#aa000055",
       borderColor: "red",
       showLine: true,
       fill: true
