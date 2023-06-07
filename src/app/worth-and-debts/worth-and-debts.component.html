@@ -1,4 +1,15 @@
 <div class="chartArea">
+
+  <div *ngIf="testing" >
+    <b>Debts</b>
+    {{debtData|json}}<br>
+    <b>Worth</b>
+    {{assetsData|json}}<br>
+    <b>Debt Data</b>
+    {{debtChartData|json}}<br>
+    <b>Worth Data</b>
+    {{assetsChartData|json}}<br>
+  </div>
   <canvas baseChart 
           [type]="lineChartType"
           [datasets]="chartData" 
