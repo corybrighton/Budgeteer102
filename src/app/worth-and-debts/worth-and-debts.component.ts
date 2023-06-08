@@ -75,6 +75,8 @@ export class WorthAndDebtsComponent implements OnInit {
       label: 'Assets',
       backgroundColor: "#2f4d2d55",
       borderColor: "#2f4d2d",
+      pointBackgroundColor: "#2f4d2d",
+      pointBorderColor: "#2f4d2d",
       showLine: true,
       fill: true
     },
@@ -83,6 +85,8 @@ export class WorthAndDebtsComponent implements OnInit {
       label: 'Debts',
       backgroundColor:"#aa000055",
       borderColor: "red",
+      pointBackgroundColor: "red",
+      pointBorderColor: "red",
       showLine: true,
       fill: true
     },
@@ -91,6 +95,8 @@ export class WorthAndDebtsComponent implements OnInit {
       label: 'Worth',
       backgroundColor:"#00aa0055",
       borderColor: "green",
+      pointBackgroundColor: "green",
+      pointBorderColor: "green",
       showLine: true,
       fill: true
     },
