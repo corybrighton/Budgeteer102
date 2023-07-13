@@ -1,7 +1,7 @@
+import { WorthModel } from './../models/worthModel';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartType, Color } from 'chart.js';
+import { ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { WorthModel } from '../models/worthModel';
 import { MockWorthDebtData } from '../mock-data/mockWorthDebtData';
 import { environment } from 'src/environments/environment';
 
@@ -14,17 +14,16 @@ export class WorthAndDebtsComponent implements OnInit {
 
   testing: boolean = environment.testing;
   // testing: boolean = false;
+
   constructor() {
-    this.normalizeDataToChart();
-   }
+  }
+  
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
-  public debtData: WorthModel[] = [];
+  public worthData!: WorthModel;
+
   public debtChartData: number[] = [];
-
-  public assetsData: WorthModel[] = [];
   public assetsChartData: number[] = [];
-
   public worthChatData: number[] = [];
   
   public lineChartOptions = {
@@ -40,33 +39,63 @@ export class WorthAndDebtsComponent implements OnInit {
     },
   };
 
-  public monthLabels: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
   public labels: string[] = [];
-  public lineChartLegend = true;
 
+  public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
 
+  addAdverage() {
+    
+  }
+
   normalizeDataToChart() {
+    // TODO add Data From server
+    this.worthData = (environment.production) ? new WorthModel([],[]) : MockWorthDebtData;
     
-    this.assetsData = MockWorthDebtData.worth;
-    this.debtData = MockWorthDebtData.debt;
-
-    this.assetsData.forEach(a => this.assetsChartData.push(a.amount));
-    this.debtData.forEach(a => this.debtChartData.push(a.amount));
-
-    let times = (this.assetsData.length > this.debtData.length) ?
-    this.assetsData.length : this.debtData.length;
+    let assetsCurrent = this.worthData.assets[0];
+    let assetsNext = this.worthData.assets[1];
+    let assetsIndex = 2;
     
-    let debtdcom = this.assetsData[0].date.getMonth();
-    let worthdcom = this.debtData[0].date.getMonth();
-    let startMonth = (worthdcom <= debtdcom) ? worthdcom : debtdcom;
+    let debtCurrent = this.worthData.debts[0];
+    let debtNext = this.worthData.debts[1];
+    let debtIndex = 2;
+    
+    let currentDateUsed = (assetsCurrent.date <= debtCurrent.date) ? assetsCurrent.date : debtCurrent.date;
+    let history = this.monthDiff(currentDateUsed) - 1;
+    
+    for (let index = 0; index <= history; index++) {
+      this.labels.push(`${currentDateUsed.getMonth() + 1}-${currentDateUsed.getFullYear().toString().slice(-2)}`);
+      
+      this.assetsChartData.push(assetsCurrent.amount);
+      this.debtChartData.push(debtCurrent.amount);
+      
+      if (this.monthDiff(currentDateUsed, assetsCurrent.date) == 0) {
+        assetsCurrent = assetsNext;
+        assetsNext = (this.worthData.assets[assetsIndex]) ? this.worthData.assets[assetsIndex] : assetsCurrent;
+        assetsIndex++;
+      }
+      
+      if (this.monthDiff(currentDateUsed, debtCurrent.date) == 0) {
+        debtCurrent = debtNext;
+        debtNext = (this.worthData.debts[debtIndex]) ? this.worthData.debts[debtIndex] : debtCurrent;
+        debtIndex++;
+      }
+      
+      currentDateUsed.setMonth(currentDateUsed.getMonth() + 1);
 
-    for (let index = 0; index < times - 1; index++) {
-      this.labels.push(this.monthLabels[startMonth + index]);
       this.worthChatData[index] = this.assetsChartData[index] - this.debtChartData[index];
     }
 
     this.chart?.update();
+  }
+
+  monthDiff(start:Date, today:Date = new Date) {
+    let months;
+    months = (today.getFullYear() - start.getFullYear()) * 12;
+    months -= start.getMonth();
+    months += today.getMonth();
+
+    return months <= 0 ? 0 : months;
   }
 
   public chartData = [
@@ -101,12 +130,12 @@ export class WorthAndDebtsComponent implements OnInit {
       fill: true
     },
   ];
-
-
   
   ngOnInit(): void {
   }
-
-
+  
+  ngAfterContentInit(): void {
+    this.normalizeDataToChart()
+  }
 
 }

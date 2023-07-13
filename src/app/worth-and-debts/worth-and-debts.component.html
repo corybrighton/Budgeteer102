@@ -2,13 +2,17 @@
 
   <div *ngIf="testing" >
     <b>Debts</b>
-    {{debtData|json}}<br>
-    <b>Worth</b>
-    {{assetsData|json}}<br>
+    {{worthData.debts|json}}<br>
+    {{worthData.debts.length}}<br>
+    <b>Assets</b>
+    {{worthData.assets |json}}<br>
+    {{worthData.assets.length}}<br>
     <b>Debt Data</b>
     {{debtChartData|json}}<br>
+    {{debtChartData.length}}<br>
     <b>Worth Data</b>
     {{assetsChartData|json}}<br>
+    {{assetsChartData.length}}<br>
   </div>
   <canvas baseChart 
           [type]="lineChartType"

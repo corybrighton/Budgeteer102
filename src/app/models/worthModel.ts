@@ -1,15 +1,16 @@
+import { WelthPoint } from "./welthPoint";
+
 interface WorthModelInterface{
-  date: Date,
-  amount?: number
+  assets: WelthPoint[],
+  debts: WelthPoint[]
 }
 
 export class WorthModel implements WorthModelInterface{
+  public assets: WelthPoint[];
+  public debts: WelthPoint[];
 
-  date: Date;
-  amount: number;
-
-  constructor(date:Date, amount = 0) {
-    this.date = date;
-    this.amount = amount;
+  constructor(assets:WelthPoint[],debts:WelthPoint[]) {
+    this.assets = assets;
+    this.debts = debts;
   }
 }

@@ -1,42 +1,35 @@
-import { WorthModel } from '../models/worthModel';
+import { WelthPoint } from "../models/welthPoint";
+import { WorthModel } from "../models/worthModel";
 
-function MakeData() {
-  return {
-    worth: MakeMockWorthDebtData(),
-    debt: MakeMockWorthDebtData()
-  }
+export const MockWorthDebtData: WorthModel =
+{
+  assets: [
+    new WelthPoint(new Date("2021-8-1"), 48),
+    new WelthPoint(new Date("2021-9-1"), 49),
+    new WelthPoint(new Date("2021-12-1"), 50),
+    new WelthPoint(new Date("2022-4-1"), 55),
+    new WelthPoint(new Date("2022-5-1"), 48),
+    new WelthPoint(new Date("2022-10-1"), 60),
+    new WelthPoint(new Date("2022-11-1"), 70),
+    new WelthPoint(new Date("2023-1-1"), 71),
+    new WelthPoint(new Date("2023-2-1"), 80),
+    new WelthPoint(new Date("2023-3-1"), 82),
+    new WelthPoint(new Date("2023-4-1"), 83),
+    new WelthPoint(new Date("2023-5-1"), 81),
+    new WelthPoint(new Date("2023-6-1"), 85),
+  ],
+  
+  debts:[
+    new WelthPoint(new Date("2021-10-1"), 49),
+    new WelthPoint(new Date("2021-11-1"), 49),
+    new WelthPoint(new Date("2022-10-1"), 44),
+    new WelthPoint(new Date("2022-11-1"), 43),
+    new WelthPoint(new Date("2022-12-1"), 45),
+    new WelthPoint(new Date("2023-1-1"), 40),
+    new WelthPoint(new Date("2023-2-1"), 36),
+    new WelthPoint(new Date("2023-3-1"), 38),
+    new WelthPoint(new Date("2023-4-1"), 35),
+    new WelthPoint(new Date("2023-5-1"), 31),
+    new WelthPoint(new Date("2023-6-1"), 30),
+  ]
 }
-
-function MakeMockWorthDebtData(): WorthModel[]{
-  let wdd: WorthModel[] = [
-    { date: new Date(2023, 5, 1), amount: 50 },
-    { date: new Date(2023, 0, 1), amount: 150 },
-  ];
-
-  let times: number = Math.floor(Math.random() * 6) + 6;
-  let dateArray: Date[] = [];
-  for (let index = 0; index < times; index++) {
-    let d = randomDate();
-    
-    if (dateArray.find(item => { return item.getMonth() == d.getMonth() })) {
-      index--;
-      continue;
-    }
-    dateArray.push(d);
-    wdd.push({ date: d, amount: randomAmount() });
-  }
-
-  return wdd.sort((a, b) =>  a.date.getTime() - b.date.getTime());
-}
-
-function randomAmount() {
-  return Math.floor(Math.random() * 150) + 20;
-}
-
-  function randomDate() {
-    const start = new Date(2022, 0, 1);
-    const end = new Date();
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-  }
-
-export const MockWorthDebtData = MakeData();
